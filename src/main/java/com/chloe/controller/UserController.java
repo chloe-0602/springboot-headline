@@ -43,4 +43,34 @@ public class UserController {
         System.out.println("result = " + result);
         return result;
     }
+
+    /**
+     * 地址: user/getUserInfo
+     * 方式: get
+     * 请求头: token = token内容
+     * 返回:
+     *    {
+     *     "code": 200,
+     *     "message": "success",
+     *     "data": {
+     *         "loginUser": {
+     *             "uid": 1,
+     *             "username": "zhangsan",
+     *             "userPwd": "",
+     *             "nickName": "张三"
+     *         }
+     *      }
+     *   }
+     *
+     * 大概流程:
+     *    1.获取token,解析token对应的userId
+     *    2.根据userId,查询用户数据
+     *    3.将用户数据的密码置空,并且把用户数据封装到结果中key = loginUser
+     *    4.失败返回504 (本次先写到当前业务,后期提取到拦截器和全局异常处理器)
+     */
+    @GetMapping("getUserInfo")
+    public Result userInfo(@RequestHeader String token){
+        Result result = userService.getUserInfo(token);
+        return result;
+    }
 }
