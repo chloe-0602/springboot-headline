@@ -1,7 +1,9 @@
 package com.chloe.service;
 
+import com.chloe.common.result.Result;
 import com.chloe.model.Headline;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.chloe.model.vo.PortalVo;
 
 /**
 * @author herry
@@ -10,4 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface HeadlineService extends IService<Headline> {
 
+    Result findNewPage(PortalVo portalVo);
 }

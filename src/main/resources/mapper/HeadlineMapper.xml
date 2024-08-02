@@ -23,4 +23,15 @@
         create_time,update_time,version,
         is_deleted
     </sql>
+
+    <select id="selectPageMap" resultType="map">
+        select hid,title,type,page_views pageViews,TIMESTAMPDIFF(HOUR,create_time,NOW()) pastHours,
+        publisher from news_headline where is_deleted=0
+        <if test="portalVo.keyWords !=null and portalVo.keyWords.length()>0 ">
+            and title like concat('%',#{portalVo.keyWords},'%')
+        </if>
+        <if test="portalVo.type != null and portalVo.type != 0">
+            and type = #{portalVo.type}
+        </if>
+    </select>
 </mapper>
