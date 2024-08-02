@@ -83,6 +83,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         return Result.build(null,ResultCodeEnum.NOTLOGIN);
     }
+
+    @Override
+    public Result checkUserName(String username) {
+
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUsername,username);
+        User user = userMapper.selectOne(queryWrapper);
+
+        if (user != null){
+            return Result.build(null,ResultCodeEnum.USERNAME_USED);
+        }
+
+        return Result.ok(null);
+    }
 }
 
 

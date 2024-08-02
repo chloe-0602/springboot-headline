@@ -73,4 +73,27 @@ public class UserController {
         Result result = userService.getUserInfo(token);
         return result;
     }
+
+    /**
+     * url地址：user/checkUserName
+     * 请求方式：POST
+     * 请求参数：param形式
+     * username=zhangsan
+     * 响应数据:
+     * {
+     *    "code":"200",
+     *    "message":"success"
+     *    "data":{}
+     * }
+     *
+     * 实现步骤:
+     *   1. 获取账号数据
+     *   2. 根据账号进行数据库查询
+     *   3. 结果封装
+     */
+    @PostMapping("checkUserName")
+    public Result checkUserName(String username){
+        Result result = userService.checkUserName(username);
+        return result;
+    }
 }
