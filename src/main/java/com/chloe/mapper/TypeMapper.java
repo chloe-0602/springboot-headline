@@ -1,0 +1,18 @@
+package com.chloe.mapper;
+
+import com.chloe.model.Type;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+/**
+* @author herry
+* @description 针对表【news_type】的数据库操作Mapper
+* @createDate 2024-08-02 14:32:21
+* @Entity com.chloe.model.Type
+*/
+public interface TypeMapper extends BaseMapper<Type> {
+
+}
+
+
+
+
