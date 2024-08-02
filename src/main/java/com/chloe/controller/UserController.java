@@ -96,4 +96,31 @@ public class UserController {
         Result result = userService.checkUserName(username);
         return result;
     }
+    /**
+     * url地址：user/regist
+     * 请求方式：POST
+     * 请求参数：
+     * {
+     *     "username":"zhangsan",
+     *     "userPwd":"123456",
+     *     "nickName":"张三"
+     * }
+     * 响应数据：
+     * {
+     *    "code":"200",
+     *    "message":"success"
+     *    "data":{}
+     * }
+     *
+     * 实现步骤:
+     *   1. 将密码加密
+     *   2. 将数据插入
+     *   3. 判断结果,成 返回200 失败 505
+     */
+
+    @PostMapping("regist")
+    public Result regist(@RequestBody User user){
+        Result result = userService.regist(user);
+        return result;
+    }
 }

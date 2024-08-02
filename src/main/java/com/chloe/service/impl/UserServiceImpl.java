@@ -97,6 +97,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         return Result.ok(null);
     }
+
+    @Override
+    public Result regist(User user) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUsername,user.getUsername());
+        Long count = userMapper.selectCount(queryWrapper);
+
+        if (count > 0){
+            return Result.build(null,ResultCodeEnum.USERNAME_USED);
+        }
+
+        user.setUserPwd(MD5Util.encrypt(user.getUserPwd()));
+        int rows = userMapper.insert(user);
+        System.out.println("rows = " + rows);
+        return Result.ok(null);
+    }
 }
 
 
