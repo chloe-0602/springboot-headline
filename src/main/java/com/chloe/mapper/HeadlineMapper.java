@@ -19,6 +19,8 @@ public interface HeadlineMapper extends BaseMapper<Headline> {
     //自定义分页查询方法
     IPage<Map> selectPageMap(IPage<Headline> page,
                              @Param("portalVo") PortalVo portalVo);
+
+    Map selectDetailMap(Integer hid);
 }
 
 

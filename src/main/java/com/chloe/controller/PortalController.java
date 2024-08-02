@@ -39,4 +39,15 @@ public class PortalController {
         return result;
     }
 
+    /**
+     * 首页详情接口
+     * @param hid
+     * @return
+     */
+    @PostMapping("showHeadlineDetail")
+    public Result showHeadlineDetail(Integer hid){
+        Result result = headlineService.showHeadlineDetail(hid);
+        return result;
+    }
+
 }

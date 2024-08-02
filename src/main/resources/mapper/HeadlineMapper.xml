@@ -34,4 +34,14 @@
             and type = #{portalVo.type}
         </if>
     </select>
+
+    <!--    Map selectDetailMap(Integer hid);-->
+    <select id="selectDetailMap" resultType="map">
+        select hid,title,article,type, h.version ,tname typeName ,page_views pageViews
+             ,TIMESTAMPDIFF(HOUR,create_time,NOW()) pastHours,publisher
+             ,nick_name author from news_headline h
+                                        left join news_type t on h.type = t.tid
+                                        left join news_user u  on h.publisher = u.uid
+        where hid = #{hid}
+    </select>
 </mapper>

@@ -13,4 +13,6 @@ import com.chloe.model.vo.PortalVo;
 public interface HeadlineService extends IService<Headline> {
 
     Result findNewPage(PortalVo portalVo);
+
+    Result showHeadlineDetail(Integer hid);
 }

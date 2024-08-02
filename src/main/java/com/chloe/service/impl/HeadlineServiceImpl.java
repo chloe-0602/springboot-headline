@@ -58,6 +58,22 @@ public class HeadlineServiceImpl extends ServiceImpl<HeadlineMapper, Headline>
         // 响应JSON
         return Result.ok(pageInfoMap);
     }
+
+    @Override
+    public Result showHeadlineDetail(Integer hid) {
+        //1.实现根据id的查询(多表
+        Map headLineDetail = headlineMapper.selectDetailMap(hid);
+        //2.拼接头条对象(阅读量和version)进行数据更新
+        Headline headline = new Headline();
+        headline.setHid(hid);
+        headline.setPageViews((Integer) headLineDetail.get("pageViews")+1); //阅读量+1
+        headline.setVersion((Integer) headLineDetail.get("version")); //设置版本
+        headlineMapper.updateById(headline);
+
+        Map<String,Object> pageInfoMap=new HashMap<>();
+        pageInfoMap.put("headline",headLineDetail);
+        return Result.ok(pageInfoMap);
+    }
 }
 
 
