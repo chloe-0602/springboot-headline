@@ -1,9 +1,12 @@
 package com.chloe.controller;
 
+import com.chloe.common.config.JwtHelper;
 import com.chloe.common.result.Result;
+import com.chloe.common.result.ResultCodeEnum;
 import com.chloe.model.User;
 import com.chloe.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private JwtHelper jwtHelper;
 
     /**
      * 登录需求
@@ -122,5 +127,15 @@ public class UserController {
     public Result regist(@RequestBody User user){
         Result result = userService.regist(user);
         return result;
+    }
+
+    @GetMapping("checkLogin")
+    public Result checkLogin(@RequestHeader String token){
+        if (StringUtils.isEmpty(token) || jwtHelper.isExpiration(token)){
+            //没有传或者过期 未登录
+            return Result.build(null, ResultCodeEnum.NOTLOGIN);
+        }
+
+        return Result.ok(null);
     }
 }
